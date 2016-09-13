@@ -1,0 +1,4 @@
+<%= for script <- @js_scripts do %>
+    <script src="<%= static_path(@conn, script) %>"></script>
+<% end %>
+
