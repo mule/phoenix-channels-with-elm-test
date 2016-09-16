@@ -5,6 +5,14 @@
 # is restricted to this project.
 use Mix.Config
 
+config :abotti_web, AbottiWeb.Repo,
+  adapter: Ecto.Adapters.Postgres,
+  database: "abotti_web_repo",
+  username: "user",
+  password: "pass",
+  hostname: "localhost"
+
+
 # Configures the endpoint
 config :abotti_web, AbottiWeb.Endpoint,
   url: [host: "localhost"],

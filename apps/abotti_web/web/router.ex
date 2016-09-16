@@ -32,13 +32,15 @@ defmodule AbottiWeb.Router do
     get "/", ElmAppController, :index
   end
 
- scope "/releaseScheduleReact", AbottiWeb do
+  scope "/releaseScheduleReact", AbottiWeb do
     pipe_through [:browser, :react_app]
     get "/", ReactAppController, :index
- end
+  end
 
-  # Other scopes may use custom stacks.
-  # scope "/api", AbottiWeb do
-  #   pipe_through :api
-  # end
+  scope "/api", AbottiWeb do
+    pipe_through :api
+    resources "/screenshots", ScreenshotController, only: [:create]  
+    get  "/heartbeats", ApiController, :index
+    post "/heartbeats", ApiController, :heartbeat 
+  end
 end

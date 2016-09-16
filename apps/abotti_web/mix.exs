@@ -23,7 +23,7 @@ defmodule AbottiWeb.Mixfile do
   def application do
     [mod: {AbottiWeb, []},
      applications: [:phoenix, :phoenix_html, :cowboy, :logger, :gettext,
-                    :phoenix_ecto, :postgrex]]
+                    :phoenix_ecto, :postgrex, :arc_ecto]]
   end
 
   # Specifies which paths to compile per environment.
@@ -40,7 +40,8 @@ defmodule AbottiWeb.Mixfile do
      {:phoenix_html, "~> 2.4"},
      {:phoenix_live_reload, "~> 1.0", only: :dev},
      {:gettext, "~> 0.9"},
-     {:cowboy, "~> 1.0"}]
+     {:cowboy, "~> 1.0"},
+     {:arc_ecto, "~> 0.4.3"}]
   end
 
   # Aliases are shortcut or tasks specific to the current project.

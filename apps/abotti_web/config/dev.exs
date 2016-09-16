@@ -37,6 +37,6 @@ config :abotti_web, AbottiWeb.Repo,
   adapter: Ecto.Adapters.Postgres,
   username: "postgres",
   password: "password",
-  database: "releaseschedule_webpack_dev",
+  database: "abotti_dev",
   hostname: "milltorq-dev.cloudapp.net",
   pool_size: 10
