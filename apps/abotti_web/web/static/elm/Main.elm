@@ -2,6 +2,8 @@ module Main exposing (..)
 import Html.App as Html
 import App.Update as Update exposing (Model, Msg)
 import App.View as View
+import Phoenix.Socket
+
 main : Program Never
 main =
     Html.program
@@ -13,5 +15,4 @@ main =
 
 subscriptions : Model -> Sub Msg
 subscriptions model =
-    Sub.none
-                
+    Phoenix.Socket.listen model.phxSocket Update.PhoenixMsg

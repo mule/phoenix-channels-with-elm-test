@@ -4,6 +4,10 @@ import Html exposing (..)
 import Html.Attributes exposing (..)
 import App.Update exposing (Msg, Model)
 import LayoutTemplates.Master as Layout
+import Phoenix.Socket
+import Phoenix.Channel
+import Phoenix.Push
+
 view : Model -> Html Msg
 view model =
     div [class "cointainer-fluid"]  [Layout.view [] [mainView model] [agentBar model]] 

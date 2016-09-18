@@ -3,6 +3,7 @@ defmodule AbottiWeb.UserSocket do
 
   ## Channels
   # channel "rooms:*", AbottiWeb.RoomChannel
+  channel "heartbeats:*", AbottiWeb.HeartbeatChannel
 
   ## Transports
   transport :websocket, Phoenix.Transports.WebSocket
