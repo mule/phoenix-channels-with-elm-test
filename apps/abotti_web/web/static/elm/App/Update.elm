@@ -3,6 +3,7 @@ import Phoenix.Socket
 import Phoenix.Channel
 import Phoenix.Push
 import Json.Encode as JE
+import Json.Decode as JD exposing ((:=), keyValuePairs, int)
 import Update.Extra exposing (andThen)
 
 type Msg
@@ -12,13 +13,18 @@ type Msg
     | ReceiveHeartbeats JE.Value
 
 type alias Model =
-    { phxSocket : Phoenix.Socket.Socket Msg
+    { phxSocket : Phoenix.Socket.Socket Msg,
+      heartbeats : List (String, Int)
     }
+
+type alias HeartbeatMsg =
+    List (String, Int)
 
 emptyModel : Model
 
 emptyModel =
-    { phxSocket = initPhxSocket
+    { phxSocket = initPhxSocket,
+      heartbeats = []
     }
 
 init : (Model, Cmd Msg)
@@ -39,8 +45,21 @@ update msg model =
                  ( { model | phxSocket = phxSocket }
                 , Cmd.map PhoenixMsg phxCmd
                 )
+        ReceiveHeartbeats raw ->
+            case JD.decodeValue heartbeatMsgDecoder raw of
+                Ok hearbeatsMessage ->
+                    let hbmsg =
+                        Debug.log "decoded value" hearbeatsMessage
+                    in
+                        { model | heartbeats = hbmsg } ! []
+                Err error ->
+                    model ! []
         _ ->
             model ! []
+
+heartbeatMsgDecoder : JD.Decoder HeartbeatMsg
+heartbeatMsgDecoder  =
+    JD.keyValuePairs int
 
 
 socketServer : String
@@ -51,5 +70,5 @@ initPhxSocket : Phoenix.Socket.Socket Msg
 initPhxSocket =
     Phoenix.Socket.init socketServer
         |> Phoenix.Socket.withDebug
-        |> Phoenix.Socket.on "new:msg" "heartbeats:lobby" ReceiveHeartbeats
+        |> Phoenix.Socket.on "new:heartbeats" "heartbeats:lobby" ReceiveHeartbeats
 

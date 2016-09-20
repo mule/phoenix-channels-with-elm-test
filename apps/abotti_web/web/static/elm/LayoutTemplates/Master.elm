@@ -7,5 +7,5 @@ view left center right =
      div [ class "row" ]
                 [ div [ class "col-xs-1" ] left
                 , div [ class "col-xs-9" ] center
-                , div [ class "co-xs-2" ] right
+                , div [ class "col-xs-2" ] right
                 ]
