@@ -1,6 +1,5 @@
 
-
-
+require('../css/main.scss');
 const Elm = require('../elm/Main');
 
 const elmDiv = document.getElementById('elm-main');
