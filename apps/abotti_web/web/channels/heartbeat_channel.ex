@@ -1,7 +1,8 @@
 defmodule AbottiWeb.HeartbeatChannel do
   use AbottiWeb.Web, :channel
-
+  require Logger
   def join("heartbeats:lobby", payload, socket) do
+    Logger.debug "Hearbeats:lobby joined: #{inspect payload}"
     if authorized?(payload) do
       {:ok, socket}
     else
@@ -26,6 +27,7 @@ defmodule AbottiWeb.HeartbeatChannel do
   # to the client. The default implementation is just to push it
   # downstream but one could filter or change the event.
   def handle_out(event, payload, socket) do
+    Logger.debug "Broadcasting #{inspect event} #{inspect payload}"
     push socket, event, payload
     {:noreply, socket}
   end

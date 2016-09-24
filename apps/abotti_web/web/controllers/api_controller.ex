@@ -8,7 +8,7 @@ defmodule AbottiWeb.ApiController do
   def heartbeat(conn, %{"agent" => agent} ) do
     AbottiWeb.HeartbeatAgent.update(agent)
     beats = AbottiWeb.HeartbeatAgent.get()
-    AbottiWeb.Endpoint.broadcast("heartbeats:lobby", "new:heartbeats", beats)
+    AbottiWeb.Endpoint.broadcast!("heartbeats:lobby", "new:heartbeats", beats)
     json conn, :ok
   end
 end
